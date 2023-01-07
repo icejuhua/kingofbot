@@ -21,7 +21,7 @@ div.PlayGround{
     width: 60vw;
     height: 70vh;
     margin: 60px auto;
-    background: lightblue;
+    
 }
 
 </style>
