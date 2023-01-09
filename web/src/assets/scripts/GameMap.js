@@ -1,4 +1,5 @@
 import { AcGameObject } from "./AcGameObject";
+import { Snake } from "./Snake";
 import { Wall } from "./Wall";
 
 export class GameMap extends AcGameObject{
@@ -7,11 +8,16 @@ export class GameMap extends AcGameObject{
         this.ctx = ctx;
         this.parent = parent;
         this.rows = 13;
-        this.cols = 13;
+        this.cols = 14;
 
         this.L = 0; //表示绝对距离，L表示一个单位的长度
         this.walls = [];
         this.iner_Walls_count = 20;//内部障碍物数量
+
+        this.snakes = [
+            new Snake({id : 0,color:"#4876EC",r : this.rows - 2,c : 1},this),
+            new Snake({id : 1,color:"#F94848",r : 1,c : this.cols - 2},this),
+        ]
     }
 
     start(){
@@ -69,9 +75,9 @@ export class GameMap extends AcGameObject{
             //分别取行列随机数
             let r = parseInt(Math.random() * this.rows);
             let c = parseInt(Math.random() * this.cols);
-            if(g[r][c] || g[c][r]) continue;
+            if(g[r][c] || g[this.rows - 1 - r][this.cols - 1 - c]) continue;
             if(r == this.rows - 2 && c == 1 || c == this.cols - 2 && r == 1) continue;
-            g[r][c] = g[c][r] = true;
+            g[r][c] = g[this.rows - 1 - r][this.cols - 1 - c] = true;
             break; 
         }
        }
