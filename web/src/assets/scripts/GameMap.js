@@ -149,6 +149,32 @@ export class GameMap extends AcGameObject{
         })
 
     }
+    /**
+     * 判断蛇的下一个位置是否合法
+     * @param {*} cell:表示下一个格子 
+     */
+    check_vaild(cell){
+        for(const wall of this.walls){
+            if(wall.r === cell.r && wall.c === cell.c){
+                return false;
+            }
+        }
+
+        for(const snake of this.snakes){
+            let k = snake.cells.length;
+            if(!snake.check_tail_increasing()){
+                k --; //当蛇尾没边长时，不需要判断
+            }
+
+            for(let i = 0 ; i < k ;i ++){
+                if(snake.cells[i].r === cell.r && snake.cells[i].c === cell.c){
+                    return false;
+                }
+            }
+        }
+        return true;
+
+    }
 
     update(){
         
