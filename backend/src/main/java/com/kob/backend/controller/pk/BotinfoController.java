@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("pk/")
+@RequestMapping("/pk/")
 public class BotinfoController {
     @RequestMapping("getbotinfo/")
     public Map<String,String> getBotInfo(){
