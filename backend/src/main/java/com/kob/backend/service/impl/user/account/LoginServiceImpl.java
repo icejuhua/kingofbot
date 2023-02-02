@@ -28,9 +28,7 @@ public class LoginServiceImpl implements LoginService {
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);// 登录失败会自动处理
         UserDetailsImpl LoginUser = (UserDetailsImpl) authenticate.getPrincipal();
         User user = LoginUser.getUser();
-        System.out.println("user:" + user);
         String jwt = JwtUtil.createJWT(user.getId().toString());
-        System.out.println("jwt:" + jwt);
         Map<String,String> map = new HashMap<>();
         map.put("error_msg","success");
         map.put("token",jwt);

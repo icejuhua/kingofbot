@@ -29,7 +29,7 @@
           </ul>
         </li>
       </ul>
-      <ul class="navbar-nav " v-else>
+      <ul class="navbar-nav " v-else-if="!$store.state.user.pulling_info">
         <li class="nav_item">
           <router-link class="nav-link" :to = "{name :'user_account_login'}" role="button" >
             登录
@@ -51,11 +51,15 @@ import { useRoute } from 'vue-router';
 import { computed } from 'vue';
 import { useStore } from 'vuex'
 
+
 export default{
     setup(){
         const route = useRoute();
         const store = useStore();
         let route_name = computed(() => route.name);
+       
+       
+
         const logout = () =>{
           store.dispatch("logout");
         }
@@ -63,6 +67,7 @@ export default{
         return{
             route_name,
             logout,
+            
         }
 
     }

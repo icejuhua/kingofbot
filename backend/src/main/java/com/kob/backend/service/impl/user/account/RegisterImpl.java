@@ -32,6 +32,7 @@ public class RegisterImpl implements RegisterService {
         }
         if (password == null || confirmedPassword == null){
             map.put("error_msg","密码不能为空");
+
             return map;
         }
 
@@ -43,6 +44,7 @@ public class RegisterImpl implements RegisterService {
         }
         if (password.length() == 0 || confirmedPassword.length() == 0){
             map.put("error_msg","密码不能为空");
+
             return map;
         }
 
@@ -74,7 +76,7 @@ public class RegisterImpl implements RegisterService {
         userMapper.insert(user);
 
 
-        map.put("error_msg","注册成功");
+        map.put("error_msg","success");
         return map;
 
     }

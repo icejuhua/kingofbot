@@ -7,10 +7,14 @@ export default ({
         photo : '',
         token : '',
         is_login : false,
+        pulling_info : true,
     },
     getters: {
     },
     mutations: {
+        updataPullinginfo(state,pulling_info){
+            state.pulling_info = pulling_info;
+        },
         updataUser(state , user){
             state.id = user.id;
             state.username = user.username;
@@ -29,6 +33,7 @@ export default ({
     },
     actions: {
         login(context,data){
+            
             $.ajax({
                   url : "http://localhost:8075/user/account/token/",
                   type: "post",
@@ -38,6 +43,7 @@ export default ({
                   },
                   success(resp){
                     if(resp.error_msg === 'success'){
+                        localStorage.setItem("jwt_token",resp.token);
                         context.commit("updataToken",resp.token);
                         data.success(resp);
                     }
@@ -76,7 +82,9 @@ export default ({
             });
         },
         logout(context){
+            localStorage.removeItem("jwt_token")
             context.commit("logout");
+            location.reload();
         }
     },
     modules: {
