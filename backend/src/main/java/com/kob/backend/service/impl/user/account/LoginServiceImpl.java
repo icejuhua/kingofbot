@@ -1,7 +1,7 @@
 package com.kob.backend.service.impl.user.account;
 
 import com.kob.backend.pojo.User;
-import com.kob.backend.service.account.LoginService;
+import com.kob.backend.service.user.account.LoginService;
 import com.kob.backend.service.impl.utils.JwtUtil;
 import com.kob.backend.service.impl.utils.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
