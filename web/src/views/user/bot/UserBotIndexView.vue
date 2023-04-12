@@ -38,17 +38,9 @@
                                             v-model:value="botadd.content"
                                             @init="editorInit"
                                             lang="c_cpp"
-                                            theme="textmate"
+                                            :theme="aceConfig.theme"
                                             style="height: 300px"
-                                            :options="{
-                                            enableBasicAutocompletion: true, //启用基本自动完成
-                                            enableSnippets: true, // 启用代码段
-                                            enableLiveAutocompletion: true, // 启用实时自动完成
-                                            fontSize: 14, //设置字号
-                                            tabSize: 2, // 标签大小
-                                            showPrintMargin: false, //去除编辑器里的竖线
-                                            highlightActiveLine: true,
-                                            }"
+                                            :options="aceConfig.options" class="ace-editor"
                                                 />
                                     </div>
                                 </div>
@@ -95,20 +87,13 @@
                                                     <div class="mb-3">
                                                         <label for="add-bot-code" class="form-label">代码</label>
                                                         <VAceEditor
-                                                        v-model:value="bot.content"
+                                                            v-model:value="botadd.content"
                                                             @init="editorInit"
                                                             lang="c_cpp"
-                                                            theme="textmate"
+                                                            :theme="aceConfig.theme"
                                                             style="height: 300px"
-                                                            :options="{
-                                                            enableBasicAutocompletion: true, //启用基本自动完成
-                                                            enableSnippets: true, // 启用代码段
-                                                            enableLiveAutocompletion: true, // 启用实时自动完成
-                                                            fontSize: 14, //设置字号
-                                                            tabSize: 2, // 标签大小
-                                                            showPrintMargin: false, //去除编辑器里的竖线
-                                                            highlightActiveLine: true,
-                                                            }" />
+                                                            :options="aceConfig.options" class="ace-editor"
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -138,6 +123,10 @@ import { useStore } from 'vuex';
 import { Modal } from 'bootstrap/dist/js/bootstrap';
 import { VAceEditor } from 'vue3-ace-editor';
 import ace from 'ace-builds';
+import "ace-builds/webpack-resolver";
+import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/theme-chrome';
+import 'ace-builds/src-noconflict/ext-language_tools';
 
 
 export default{
@@ -145,6 +134,60 @@ export default{
         VAceEditor,
     },
     setup(){
+        const aceConfig = reactive({
+            theme: 'chrome', //主题
+            arr: [
+                /*所有主题*/
+                "ambiance",
+                "chaos",
+                "chrome",
+                "clouds",
+                "clouds_midnight",
+                "cobalt",
+                "crimson_editor",
+                "dawn",
+                "dracula",
+                "dreamweaver",
+                "eclipse",
+                "github",
+                "gob",
+                "gruvbox",
+                "idle_fingers",
+                "iplastic",
+                "katzenmilch",
+                "kr_theme",
+                "kuroir",
+                "merbivore",
+                "merbivore_soft",
+                "monokai",
+                "mono_industrial",
+                "pastel_on_dark",
+                "solarized_dark",
+                "solarized_light",
+                "sqlserver",
+                "terminal",
+                "textmate",
+                "tomorrow",
+                "tomorrow_night",
+                "tomorrow_night_blue",
+                "tomorrow_night_bright",
+                "tomorrow_night_eighties",
+                "twilight",
+                "vibrant_ink",
+                "xcode",
+            ],
+            readOnly: false, //是否只读
+            options: {
+                enableBasicAutocompletion: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: true,
+                tabSize: 2,
+                showPrintMargin: false,
+                fontSize: 16
+            }
+        });
+
+        
         ace.config.set(
         "basePath", 
         "https://cdn.jsdelivr.net/npm/ace-builds@" + require('ace-builds').version + "/src-noconflict/")
@@ -251,6 +294,7 @@ export default{
             add_bot,
             remove_bot,
             updata_bot,
+            aceConfig,
        }
     }
 }

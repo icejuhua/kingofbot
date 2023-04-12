@@ -1,11 +1,11 @@
 
-
 export default ({
     state: {
        status : "matching", // matching代表正在匹配 playing代表正在游玩
        socket : null,
        opponent_username : "",
-       opponent_photo : "",       
+       opponent_photo : "",
+       gamemap : null,       
     },
     getters: {
     },
@@ -19,6 +19,9 @@ export default ({
         },
         updateStatus(state , status){
             state.status = status;
+        },
+        updateGamemap(state,gamemap){
+            state.gamemap = gamemap;
         }
     },
     actions: {
